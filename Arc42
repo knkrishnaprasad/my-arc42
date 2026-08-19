@@ -1,0 +1,13 @@
+my-arc42-sandbox/
+├── .github/
+│   └── workflows/
+│       └── render-docs.yml     # The CI/CD Pipeline
+├── docs/
+│   ├── arc42/                  # Modular Arc42 sections
+│   │   ├── 01_introduction_and_goals.adoc
+│   │   ├── 03_system_scope_and_context.adoc
+│   │   └── 05_building_block_view.adoc
+│   ├── diagrams/
+│   │   └── context-diagram.puml # Diagrams-as-Code
+│   └── index.adoc              # Master entry point
+└── README.md
