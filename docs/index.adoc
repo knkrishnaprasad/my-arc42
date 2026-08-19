@@ -1,0 +1,16 @@
+= System Architecture Documentation
+:toc: left
+:icons: font
+
+include::arc42/01_introduction_and_goals.adoc[]
+
+== 3. System Scope and Context
+include::arc42/03_system_scope_and_context.adoc[]
+
+[plantuml, context-diagram, png]
+....
+include::diagrams/context-diagram.puml[]
+....
+
+== 5. Building Block View
+include::arc42/05_building_block_view.adoc[]

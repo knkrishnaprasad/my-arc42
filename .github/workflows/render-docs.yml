@@ -1,0 +1,40 @@
+name: Build and Publish Arc42 Docs
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java (Required for PlantUML)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Graphviz (For PlantUML rendering)
+        run: sudo apt-get update && sudo apt-get install -y graphviz
+
+      - name: Render AsciiDoc to HTML via Docker
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/documents \
+            asciidoctor/docker-asciidoctor \
+            asciidoctor -r asciidoctor-diagram docs/index.adoc -o dist/index.html
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist/'
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
